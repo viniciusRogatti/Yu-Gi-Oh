@@ -1,0 +1,26 @@
+{
+  "name": "yu-gi-oh",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/viniciusRogatti/Yu-Gi-Oh.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/viniciusRogatti/Yu-Gi-Oh/issues"
+  },
+  "homepage": "https://github.com/viniciusRogatti/Yu-Gi-Oh#readme",
+  "devDependencies": {
+    "jest": "^28.1.2"
+  }
+}
