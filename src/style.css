@@ -5,15 +5,128 @@
   box-sizing: border-box;
 }
 
-#displayCard
-{
-  width: 100vw;
-  height: 300px;
-  background-color: red;
+body {
+  height: 100%;
 }
 
-.img-Random
+/* #displayCard
 {
-  width: 20px;
-  width: 40px;
+  position: relative;
+  width: 100vw;
+  height: 80vw;
+  background-color: red;
+} */
+
+/* .img-Random
+{
+  width: 200px;
+  width: 400px;
+} */
+
+@media screen and (min-width: 300px) and (max-width: 504px) {
+  header {
+  display: flex;
+  height: 8vw;
+  overflow: hidden;
+  background-color: black;
+  text-align: center;
+ }
+
+ header img {
+  z-index: 1;
+  margin-left: 35vw;
+  position: absolute;
+  height: 15vw;
+  width: 30vw;
+  padding: 1.5vw;
+ }
+
+ main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-content: center;
+ }
+
+ #displayCard {
+  position: relative;
+  background-color: white;
+  height: 99vw;
+  width: 100vw;
+  max-height: 200vw;
+  background-color: red;
+ }
+
+ #container {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+ }
+
+ .container-inputCard {
+  display: flex;
+  flex-direction: column;
+ }
+
+ #inputCard {
+  height: 5vw;
+  width: 80vw;
+  padding: 2.5vw;
+  border: 0.7vw solid black;
+  border-radius: 1.5vw;
+  margin-bottom: 1.5vw;
+ }
+
+ #inputCard::placeholder {
+  font-size: 3.5vw;
+ }
+
+ .buttons {
+  background-color: #f2db3b;
+  color: #011a3d;
+  height: 8vw;
+  width: 60vw;
+  padding: 1.5vw;
+  border: 0.7vw solid black;
+  border-radius: 1.5vw;
+  margin: 1.3vw;
+  font-size: 3.2vw;;
+ }
+
+ .buttons:hover {
+  background-color: white;
+  color: black;
+ }
+
+ footer {
+  margin: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #111;
+  width: 100vw;
+  padding-top: 40px;
+  color: #fff;
+  text-align: center;
+ }
+
+ footer p {
+  font-size: 4vw;
+  line-height: 1.5vw;
+  padding-bottom: 9vw;
+ }
+}
+
+
+
+@media screen and (min-width: 505px) and (max-width: 1024px) {
+  body {
+    background-color: pink;
+  }
+}
+
+@media screen and (min-width: 1025px) {
+  body {
+    background-color: purple;
+  }
 }
