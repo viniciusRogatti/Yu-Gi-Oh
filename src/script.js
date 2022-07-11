@@ -4,20 +4,26 @@ const inputCard = document.getElementById('inputCard');
 const btnRandom = document.getElementById('btn-random');
 const imgsRandoms = document.getElementsByClassName('img-Random');
 const btnId = document.getElementById('btn-id');
-const msgErro = 'Seu deck já contém 40 cartas ou você tem 3 cartas repetidas nele';
+const msgErrorLimited = 'Seu deck já contém 40 cartas ou você tem 3 cartas repetidas nele';
 const popup = document.querySelector('#popup');
-const btnInfos = document.getElementById('btn-infos');
 
 const exibInfo = (obj) => { 
   // Id: obj.id, Name: obj.name, Describe: obj.desc,  Archetype: obj.archetype, Attribute: obj.attribute,
   // Race: obj.race, Type: obj.type, Atk: obj.atk, Def: obj.def, Level: obj.level, Price: obj.card_prices[0].amazon_price,
-
+  console.log(obj);
   const paragraph = document.createElement('p');
   paragraph.id = 'paragraph-Info';
   paragraph.innerText = `Name: ${obj.name}
   Id: ${obj.id}
   Describe: ${obj.desc},`;
   popup.appendChild(paragraph);
+}
+
+const deleteImage = () => {
+  const imageSelected = document.querySelector('.imgZoom')
+  for (let i = 0; i < displayCard.children.length; i++) {
+    if (displayCard.children[i].id === imageSelected.id) return displayCard.removeChild(displayCard.children[i])
+  }
 }
 
 const active = () => {
@@ -62,7 +68,7 @@ const checkRepeatedElements = () => {
 
 btnId.addEventListener("click", async () => {
   const check = await checkRepeatedElements();
-  if (check) return alert(msgErro);
+  if (check) return alert(msgErrorLimited);
   const number = parseInt(inputCard.value);
   if (typeof number !== "number") return alert("Invalid number ID");
   const response = await searchCard("cardinfo.php?id=", number);
@@ -76,7 +82,7 @@ btnId.addEventListener("click", async () => {
 
 btnRandom.addEventListener('click', async () => {
   const check = await checkRepeatedElements();
-  if (check) return alert(msgErro);
+  if (check) return alert(msgErrorLimited);
   if (imgsRandoms.length < 40) {
     const result = await searchCard('randomcard.php');
     const { card_images } = result;
@@ -90,7 +96,7 @@ btnRandom.addEventListener('click', async () => {
 
 buttonOneCard.addEventListener('click', async () => {
   const check = checkRepeatedElements();
-  if (check) return alert(msgErro)
+  if (check) return alert(msgErrorLimited)
   const name = inputCard.value;
   const array = name.trim().split(' ');
   const nameCard = array.map(str => str[0].toUpperCase() + str.substr(1)).join(' ');
@@ -124,11 +130,11 @@ const removeChilds = (string) => {
   } 
   for (let i = 0; i < popup.children.length; i++) {
     if (popup.children[i].src) popup.removeChild(popup.children[i]);
-    if (popup.children[i].id === 'paragraph-Info')popup.removeChild(popup.children[i]);
   }
 }
 
 displayCard.addEventListener('click', (e) => {
+  removeChilds('paragraph')
   const obj = {
     src: e.target.src,
     id: e.target.id,
@@ -143,14 +149,27 @@ popup.addEventListener('click', (e) => {
   if (e.target.id === 'btn-popup') {
     removeChilds();
     active();
-  }
+  } if (e.target.id === 'delete') {
+    deleteImage()
+    active();
+    return removeChilds();
+  } if (e.target.id === 'btn-infos') return getInfoCard();
 });
 
-btnInfos.addEventListener('click', async () => {
+const getInfoCard = async () => {
   removeChilds('paragraph');
   const imageInfo = document.querySelector('.imgZoom');
   const idInfo = parseInt(imageInfo.id);
   const response = await searchCard("cardinfo.php?id=", idInfo)
   const { data } = response;
-    return exibInfo(data[0]);
-});
+  console.log(data);
+  try {
+    return await exibInfo(data[0]);
+  } catch (error) {
+    return alert('Essa carta não tem informações disponíveis')
+  }
+}; 
+
+window.addEventListener('click', () => {
+  inputCard.value = '';
+})
