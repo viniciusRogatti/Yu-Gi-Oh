@@ -13,6 +13,14 @@ body {
   width: 100%;
   background-color: #271c1c;
 }
+#header.active, #container.active, #displayCard.active
+{
+  filter:blur(5px);
+  opacity: 0.6;
+  pointer-events: none;
+  user-select: none;
+  z-index: -1;
+}
 #displayCard
 {
   display: flex;
@@ -35,13 +43,6 @@ body {
 {
   transform: rotate(10deg);
   transition: 1.0s;
-}
-.container-cards#displayCard.active
-{
-  filter:blur(5px);
-  pointer-events: none;
-  user-select: none;
-  background-color: rgb(15, 18, 20);
 }
 #popup
 {

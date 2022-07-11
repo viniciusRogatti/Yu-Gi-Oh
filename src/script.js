@@ -6,8 +6,10 @@ const imgsRandoms = document.getElementsByClassName('img-Random');
 const btnId = document.getElementById('btn-id');
 const msgErrorLimited = 'Seu deck já contém 40 cartas ou você tem 3 cartas repetidas nele';
 const popup = document.querySelector('#popup');
+const header = document.getElementById('header');
+const container = document.getElementById('container');
 
-const exibInfo = (obj) => { 
+const exibInfo = (obj) => {
   // Id: obj.id, Name: obj.name, Describe: obj.desc,  Archetype: obj.archetype, Attribute: obj.attribute,
   // Race: obj.race, Type: obj.type, Atk: obj.atk, Def: obj.def, Level: obj.level, Price: obj.card_prices[0].amazon_price,
   console.log(obj);
@@ -35,7 +37,9 @@ const active = () => {
     } return;
   }
   displayCard.classList.toggle('active');
-  popup.classList.toggle('active');  
+  popup.classList.toggle('active');
+  header.classList.toggle('active');
+  container.classList.toggle('active');
 }
 
 const searchCard = async (key, ...nameOrId) => {
@@ -60,7 +64,7 @@ const checkRepeatedElements = () => {
   const elementsId = [];
   for (let i = 0; i < imgsRandoms.length; i += 1) {
     let count = elementsId.filter((e) => imgsRandoms[i].id.includes(e));
-    if (count.length >= 2 || elementsId.length >= 40) {
+    if (count.length >= 2 || imgsRandoms.length >= 40) {
       return true;
     } elementsId.push(imgsRandoms[i].id);
   } return false;
@@ -83,15 +87,12 @@ btnId.addEventListener("click", async () => {
 btnRandom.addEventListener('click', async () => {
   const check = await checkRepeatedElements();
   if (check) return alert(msgErrorLimited);
-  if (imgsRandoms.length < 40) {
-    const result = await searchCard('randomcard.php');
-    const { card_images } = result;
-    return creatImg({
-      id: result.id,
-      srcImage: card_images[0].image_url,
-    });
-  }
-  return alert('meu irmão deu, né?')
+  const result = await searchCard('randomcard.php');
+  const { card_images } = result;
+  return creatImg({
+    id: result.id,
+    srcImage: card_images[0].image_url,
+  });
 })
 
 buttonOneCard.addEventListener('click', async () => {
@@ -111,7 +112,7 @@ buttonOneCard.addEventListener('click', async () => {
 
 const exibPopup = async (obj) => {
   const { src, id } = obj;
-  if(!src) return;
+  if (!src) return;
   await removeChilds();
   const imgZoom = document.createElement('img');
   imgZoom.src = src;
@@ -127,7 +128,7 @@ const removeChilds = (string) => {
         return popup.removeChild(popup.children[i]);
       }
     } return;
-  } 
+  }
   for (let i = 0; i < popup.children.length; i++) {
     if (popup.children[i].src) popup.removeChild(popup.children[i]);
   }
@@ -168,7 +169,7 @@ const getInfoCard = async () => {
   } catch (error) {
     return alert('Essa carta não tem informações disponíveis')
   }
-}; 
+};
 
 window.addEventListener('click', () => {
   inputCard.value = '';
