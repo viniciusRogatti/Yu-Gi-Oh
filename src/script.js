@@ -1,10 +1,24 @@
-const displayCard = document.querySelector('#displayCard');
+const displayCard = document.getElementById('displayCard');
 const buttonOneCard = document.getElementById('buttonOneCard');
 const inputCard = document.getElementById('inputCard');
 const btnRandom = document.getElementById('btn-random');
 const imgsRandoms = document.getElementsByClassName('img-Random');
 const btnId = document.getElementById('btn-id');
 const msgErro = 'Seu deck já contém 40 cartas ou você tem 3 cartas repetidas nele';
+const popup = document.querySelector('#popup');
+
+const active = () => {
+  removeChilds();
+  const zoomElements = document.querySelectorAll('.active');
+  if (zoomElements.length === 2) {
+    for (let i = 0; i < zoomElements.length; i++) {
+      zoomElements[i].classList.remove('active');
+    } return;
+  }
+  displayCard.classList.toggle('active');
+  popup.classList.toggle('active');
+  
+}
 
 const searchCard = async (key, ...nameOrId) => {
   const url = `https://db.ygoprodeck.com/api/v7/${key}${nameOrId}`;
@@ -77,11 +91,33 @@ buttonOneCard.addEventListener('click', async () => {
   });
 });
 
-displayCard.addEventListener('click', (e) => {
-  const zoom = e.target;
-  const zoomElements = document.querySelectorAll('.active');
-  zoom.classList.toggle('active');
-  for(let i = 0; i < zoomElements.length; i++) {
-    zoomElements[i].classList.remove('active');
+const exibPopup = async (src) => {
+  if(!src) return;
+  await removeChilds();
+  const imgZoom = document.createElement('img');
+  imgZoom.src = src;
+  imgZoom.id = 'imgZoom';
+  popup.appendChild(imgZoom);
+};
+
+const removeChilds = () => {
+  for (let i = 0; i < popup.children.length; i++) {
+    if (popup.children[i].src) popup.removeChild(popup.children[i]);
   }
-})
+}
+
+
+
+displayCard.addEventListener('click', (e) => {
+  if (e.target.src) {
+    exibPopup(e.target.src)
+    active();
+  }
+});
+
+popup.addEventListener('click', (e) => {
+  if (e.target.id === 'btn-popup') {
+    active();
+    removeChilds();
+  }
+});

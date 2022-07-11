@@ -14,25 +14,26 @@
     <img src="../img/yugioh.png" alt="">
   </header>
   <main>
-    <section id="displayCard"></section>
-
+    <section class="container-cards" id="displayCard">
+    </section>
+    <div id="popup">
+      <button id="btn-infos">Mais Infos</button>
+      <div id="btn-popup">X</div>
+    </div>
     <section id="container">
-        <div class="container-inputCard">
-            <input type="text" id="inputCard" placeholder="Digite o nome de uma carta!"> 
-            <div>
-                <button class="buttons"id="buttonOneCard">ENTER</button>
-                <button class="buttons" id="btn-id">Id</button>
-            </div> 
-          </div>
-          <div class="container-options">
-            <div>
-                <button class="buttons" id="btn-random">GENERATE RANDOM CARD</button>
-            </div>
-            <div>
-                <button class="buttons" id="btn-infos" >INFO CARD</button>
-            </div>
-            <button class="buttons" id="btn-deck">GENERATE DECK</button>
-          </div>
+      <div class="container-inputCard">
+        <input type="text" id="inputCard" placeholder="Digite o nome de uma carta!">
+        <div>
+          <button class="buttons" id="buttonOneCard">ENTER</button>
+          <button class="buttons" id="btn-id">Id</button>
+        </div>
+      </div>
+      <div class="container-options">
+        <div>
+          <button class="buttons" id="btn-random">GENERATE RANDOM CARD</button>
+        </div>
+        <button class="buttons" id="btn-deck">GENERATE DECK</button>
+      </div>
     </section>
   </main>
   <footer>
@@ -40,4 +41,5 @@
   </footer>
   <script src="script.js"></script>
 </body>
+
 </html>
