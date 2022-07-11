@@ -6,6 +6,19 @@ const imgsRandoms = document.getElementsByClassName('img-Random');
 const btnId = document.getElementById('btn-id');
 const msgErro = 'Seu deck já contém 40 cartas ou você tem 3 cartas repetidas nele';
 const popup = document.querySelector('#popup');
+const btnInfos = document.getElementById('btn-infos');
+
+const exibInfo = (obj) => { 
+  // Id: obj.id, Name: obj.name, Describe: obj.desc,  Archetype: obj.archetype, Attribute: obj.attribute,
+  // Race: obj.race, Type: obj.type, Atk: obj.atk, Def: obj.def, Level: obj.level, Price: obj.card_prices[0].amazon_price,
+
+  const paragraph = document.createElement('p');
+  paragraph.id = 'paragraph-Info';
+  paragraph.innerText = `Name: ${obj.name}
+  Id: ${obj.id}
+  Describe: ${obj.desc},`;
+  popup.appendChild(paragraph);
+}
 
 const active = () => {
   removeChilds();
@@ -16,8 +29,7 @@ const active = () => {
     } return;
   }
   displayCard.classList.toggle('active');
-  popup.classList.toggle('active');
-  
+  popup.classList.toggle('active');  
 }
 
 const searchCard = async (key, ...nameOrId) => {
@@ -49,7 +61,7 @@ const checkRepeatedElements = () => {
 }
 
 btnId.addEventListener("click", async () => {
-  const check = checkRepeatedElements();
+  const check = await checkRepeatedElements();
   if (check) return alert(msgErro);
   const number = parseInt(inputCard.value);
   if (typeof number !== "number") return alert("Invalid number ID");
@@ -63,7 +75,7 @@ btnId.addEventListener("click", async () => {
 });
 
 btnRandom.addEventListener('click', async () => {
-  const check = checkRepeatedElements();
+  const check = await checkRepeatedElements();
   if (check) return alert(msgErro);
   if (imgsRandoms.length < 40) {
     const result = await searchCard('randomcard.php');
@@ -91,33 +103,54 @@ buttonOneCard.addEventListener('click', async () => {
   });
 });
 
-const exibPopup = async (src) => {
+const exibPopup = async (obj) => {
+  const { src, id } = obj;
   if(!src) return;
   await removeChilds();
   const imgZoom = document.createElement('img');
   imgZoom.src = src;
-  imgZoom.id = 'imgZoom';
+  imgZoom.classList.add('imgZoom');
+  imgZoom.id = id;
   popup.appendChild(imgZoom);
 };
 
-const removeChilds = () => {
+const removeChilds = (string) => {
+  if (string === 'paragraph') {
+    for (let i = 0; i < popup.children.length; i++) {
+      if (popup.children[i].id === 'paragraph-Info') {
+        return popup.removeChild(popup.children[i]);
+      }
+    } return;
+  } 
   for (let i = 0; i < popup.children.length; i++) {
     if (popup.children[i].src) popup.removeChild(popup.children[i]);
+    if (popup.children[i].id === 'paragraph-Info')popup.removeChild(popup.children[i]);
   }
 }
 
-
-
 displayCard.addEventListener('click', (e) => {
+  const obj = {
+    src: e.target.src,
+    id: e.target.id,
+  }
   if (e.target.src) {
-    exibPopup(e.target.src)
+    exibPopup(obj)
     active();
   }
 });
 
 popup.addEventListener('click', (e) => {
   if (e.target.id === 'btn-popup') {
-    active();
     removeChilds();
+    active();
   }
+});
+
+btnInfos.addEventListener('click', async () => {
+  removeChilds('paragraph');
+  const imageInfo = document.querySelector('.imgZoom');
+  const idInfo = parseInt(imageInfo.id);
+  const response = await searchCard("cardinfo.php?id=", idInfo)
+  const { data } = response;
+    return exibInfo(data[0]);
 });
