@@ -13,13 +13,23 @@ body {
   width: 100%;
   background-color: #271c1c;
 }
-#header.active, #container.active, #displayCard.active
+
+#body.active
+{
+  background: url(/img/22-221633_yu-gi-oh-wallpaper-hd.jpg);
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+#header.active
 {
   filter:blur(5px);
-  opacity: 0.6;
+}
+#container.active, #displayCard.active
+{
+  opacity: 0;
   pointer-events: none;
   user-select: none;
-  z-index: -1;
 }
 #displayCard
 {
@@ -49,8 +59,8 @@ body {
   position: fixed;
   visibility: hidden;
   opacity: 0;
-  top: 40%;
-  left: 20%;
+  top: 45%;
+  left: 25%;
   transform: translate(-30%, -50%);
   background-color: #240c0c;
   box-shadow: -25px 10px 100px 5px rgba(255, 196, 0, 30);
@@ -103,10 +113,11 @@ body {
   justify-content: center;
   align-items: center;
   bottom: -48vw;
+  background-color: rgb(251, 255, 0);
 }
 #btn-infos:hover
 {
-  background-color: #ffd000;
+  background-color: #589b00;
 }
 #delete
 {
@@ -121,12 +132,12 @@ body {
   align-items: center;
   bottom: -46vw;
   left: 15vw;
+  background-color: rgb(251, 255, 0);
 }
 #delete:hover
 {
-  background-color: #ffd000;
+  background-color: #ff0000;
 }
-
 #paragraph-Info
 {
   position: relative;
@@ -135,7 +146,7 @@ body {
   display:flex;
   justify-content: center;
   align-items: center;
-  width: 50vw;
+  width: 45vw;
   height: auto;
   font-size: 1.5em;
   left: 27vw;
