@@ -95,18 +95,14 @@ const exibPopup = async (src) => {
   if(!src) return;
   await removeChilds();
   const imgZoom = document.createElement('img');
-  const divBtn = document.createElement('div');  
-  divBtn.id = 'btn-popup';
-  divBtn.innerHTML = 'X';
   imgZoom.src = src;
   imgZoom.id = 'imgZoom';
   popup.appendChild(imgZoom);
-  popup.appendChild(divBtn);
 };
 
 const removeChilds = () => {
-  for (let i = 0; i < popup.childElementCount; i++) {
-    popup.removeChild(popup.children[i]);
+  for (let i = 0; i < popup.children.length; i++) {
+    if (popup.children[i].src) popup.removeChild(popup.children[i]);
   }
 }
 
