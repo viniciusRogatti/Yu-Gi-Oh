@@ -8,6 +8,7 @@ const msgErrorLimited = 'Seu deck já contém 40 cartas ou você tem 3 cartas re
 const popup = document.querySelector('#popup');
 const header = document.getElementById('header');
 const container = document.getElementById('container');
+const body = document.getElementById('body');
 
 const exibInfo = (obj) => {
   // Id: obj.id, Name: obj.name, Describe: obj.desc,  Archetype: obj.archetype, Attribute: obj.attribute,
@@ -40,6 +41,7 @@ const active = () => {
   popup.classList.toggle('active');
   header.classList.toggle('active');
   container.classList.toggle('active');
+  body.classList.toggle('active');
 }
 
 const searchCard = async (key, ...nameOrId) => {
