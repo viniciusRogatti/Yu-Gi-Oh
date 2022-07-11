@@ -4,7 +4,6 @@
   padding: 0;
   box-sizing: border-box;
 }
-
 body {
   display: flex;
   flex-direction: column;
@@ -12,32 +11,78 @@ body {
   align-items: center;
   height: 100%;
   width: 100%;
+  background-color: #160101;
 }
-
 #displayCard
 {
   display: flex;
+  justify-content: center;
   flex-wrap: wrap;
-  width: 100vw;
-  height: 32vw;
-  background-color: red;
+  max-width: 85vw;
+  height:fit-content;
+  background-color: #240c0c;
+  border: 1px solid #ffd000;
+  border-radius: 5px;
 }
-
 .img-Random
 {
   width: 6vw;
   height: 10vw;
 }
-
-.img-Random.active
+.container-cards#displayCard.active
 {
-  position: absolute;
-  left: 40vw;
+  filter:blur(5px);
+  pointer-events: none;
+  user-select: none;
+  background-color: rgb(15, 18, 20);
+}
+#popup
+{
+  position: fixed;
+  visibility: hidden;
+  opacity: 0;
+  top: 40%;
+  left: 35%;
+  transform: translate(-30%, -50%);
+  background-color: #240c0c;
+  box-shadow: -25px -15px 100px 5px rgba(255, 196, 0, 30);
   width: 25vw;
   height: 35vw;
+  padding: 10vw;
+  transition: 0.5s;
+  border-radius: 5px;
+}
+#popup.active
+{
+  opacity: 1;
+  visibility: visible;
+  background-image: url(/img/back_high.jpg);
+  background-size: contain;
 }
 
-@media screen and (min-width: 300px) and (max-width: 504px) {
+#btn-popup
+{
+  position: relative;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  width: 5vw;
+  height: 5vw;
+  border-radius: 50%;
+  background-color: red;
+  color: #fff;
+  font-size: 1.5em;
+  left: 10vw;
+  bottom: 2vw;
+  opacity: 0.7;
+  cursor: pointer;
+}
+#imgZoom
+{
+  width: 25vw;
+  height: 40vw;
+}
+/* @media screen and (min-width: 300px) and (max-width: 504px) {
   header {
   display: flex;
   height: 8vw;
@@ -143,4 +188,4 @@ body {
   body {
     background-color: purple;
   }
-}
+} */
