@@ -14,13 +14,13 @@ body {
   background-color: #271c1c;
 }
 
-#body.active
+/* #body.active
 {
   background: url(/img/22-221633_yu-gi-oh-wallpaper-hd.jpg);
   background-size: cover;
   background-attachment: fixed;
 }
-
+ */
 #header.active
 {
   filter:blur(5px);
@@ -51,8 +51,9 @@ body {
 }
 .img-Random:hover
 {
-  transform: rotate(10deg);
-  transition: 1.0s;
+  box-shadow: -25px -15px 25px rgb(0, 0, 0),
+  inset 25px 15px 25px rgb(0, 0, 0);
+  border: solid 2px #ffd000;
 }
 #popup
 {
