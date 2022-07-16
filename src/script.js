@@ -16,9 +16,7 @@ const exibInfo = (obj) => {
   console.log(obj);
   const paragraph = document.createElement('p');
   paragraph.id = 'paragraph-Info';
-  paragraph.innerText = `Name: ${obj.name}
-  Id: ${obj.id}
-  Describe: ${obj.desc},`;
+  paragraph.innerText = `Name: ${obj.name}\n Id: ${obj.id}\n Describe: ${obj.desc},`;
   popup.appendChild(paragraph);
 }
 
