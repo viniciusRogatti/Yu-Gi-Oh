@@ -66,6 +66,7 @@ body {
  .container-inputCard {
   display: flex;
   flex-direction: column;
+  align-items: center;
  }
 
  #inputCard {
